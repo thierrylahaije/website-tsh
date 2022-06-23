@@ -10,8 +10,7 @@ aliases:
 
 ## Overview
 
-In this example, you find a simple code to web scrape the website, RankingTheBrands.com in `webscraping_ranking_the_brands.ipynb`
-
+In this example, you find a simple code to web scrape the website, RankingTheBrands.com in `webscraping_ranking_the_brands.ipynb`!
 
 ![](../images/screenshot_rankingthebrands.png)
 
