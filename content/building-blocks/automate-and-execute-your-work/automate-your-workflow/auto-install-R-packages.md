@@ -1,6 +1,6 @@
 ---
-title: "Automatically Install R Packages Used in a Project"
-description: "Easily find all the R packages used in a project and automatically install them."
+title: "THis is to short"
+description: "Description is to short as well"
 keywords: "R packages, installation, find, gist"
 #date: 2021-01-06T22:01:14+05:30
 draft: false

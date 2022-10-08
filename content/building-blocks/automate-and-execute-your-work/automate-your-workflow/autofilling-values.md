@@ -1,6 +1,6 @@
 ---
-title: "Make Tables and Figures Reproducible with Autofilling Values"
-description: "Learn how to use R to check for errors and the completion of Stata code in batch mode or in a Makefile."
+title: "This tile is way to long and should give a error messege becaus it contains to much words for what a title should have"
+description: "The description is to long as well and should give an error message. This description should have less words and because of the many words it contains should give some error to prevent this from being published to the main branch. "
 keywords: "autofilling, tablefill, latex, lyx"
 
 weight: 3
