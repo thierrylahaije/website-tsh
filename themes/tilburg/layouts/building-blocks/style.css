@@ -1,0 +1,414 @@
+/* CSS reset */
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    position: relative;
+    background-color: #eee8dd;
+}
+
+/* Main heading for card's front cover */
+.card-front__heading {
+    font-size: 2.75rem;
+    margin-top: .75rem;
+    text-align: center;
+}
+
+/* Main heading for inside page */
+.inside-page__heading {
+    padding-bottom: 1rem;
+    width: 100%;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-top: .2rem;
+    text-align: left;
+}
+
+/* For both inside page's main heading and 'view me' text on card front cover */
+.card-front__text-view {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-top: .2rem;
+}
+
+/* Front cover */
+
+.card-front__tp {
+    color: #fafbfa;
+}
+
+/* For pricing text on card front cover */
+.card-front__text-description {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Back cover */
+
+/* For inside page's body text */
+.inside-page__text {
+    font-size:12px;
+    color: #333;
+    text-align: left;
+}
+
+/* Layout Structure=========================================*/
+
+.main {
+    padding-top:50px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Container to hold all cards in one place */
+.card-area {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    margin-bottom: -100px;
+}
+
+/* Card ============================================*/
+
+/* Area to hold an individual card */
+.card-section {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+/* A container to hold the flip card and the inside page */
+.card {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, .05);
+    height: 30rem;
+    position: relative;
+    transition: all 1s ease;
+    width: 30rem;
+    margin: 1.5rem;
+    z-index:1;
+}
+
+/* Flip card - covering both the front and inside front page */
+
+/* An outer container to hold the flip card. This excludes the inside page */
+.flip-card {
+    height: 30rem;
+    perspective: 100rem;
+    position: absolute;
+    right: 0;
+    transition: all 1s ease;
+    visibility: hidden;
+    width: 30rem;
+    z-index: 100;
+    border-radius: 10px;
+}
+
+/* The outer container's visibility is set to hidden. This is to make everything within the container NOT set to hidden  */
+/* This is done so content in the inside page can be selected */
+.flip-card>* {
+    visibility: visible;
+}
+
+/* An inner container to hold the flip card. This excludes the inside page */
+.flip-card__container {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    transform-origin: left;
+    transform-style: preserve-3d;
+    transition: all 1s ease;
+    width: 100%;
+}
+
+.card-front,
+.card-back {
+    backface-visibility: hidden;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+/* Styling for the front side of the flip card */
+
+/* container for the front side */
+.card-front {
+    background-color: #fafbfa;
+    height: 30rem;
+    width: 30rem;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* Front side's top section */
+.card-front__tp {
+    align-items: center;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 57% 90%, 50% 100%, 43% 90%, 0 90%);
+    display: flex;
+    flex-direction: column;
+    height: 27rem;
+    justify-content: center;
+    padding: 5rem;
+    border-top-right-radius: 10px;
+}
+
+.card-front__tp--card1 {
+    background: linear-gradient(to bottom,
+            #ff73b9,
+            #ff40a1);
+}
+
+.card-front__tp--card2 {
+    background: linear-gradient(to bottom,
+            #7394ff,
+            #4046ff);
+}
+
+.card-front__tp--card3 {
+    background: linear-gradient(to bottom,
+            #73ffa2,
+            #40ff69);
+}
+
+.inside-page__heading--card1,
+.card-front__text-view--card1 {
+    color: #ff62b2;
+}
+
+.inside-page__heading--card2,
+.card-front__text-view--card2 {
+    color: #4046ff;
+}
+
+.inside-page__heading--card3,
+.card-front__text-view--card3 {
+    color: #40ff69;
+}
+
+.color4{
+    background-color: #4046ff;
+}
+
+/* Front card's bottom section */
+.card-front-bt {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-bottom-right-radius: 10px;
+}
+
+/* Styling for the back side of the flip card */
+
+.card-back {
+    height: 100%;
+    padding: 2rem;
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transform: rotateY(180deg);
+}
+
+/* Inside page */
+
+.inside-page {
+    background-color: white;
+    height: 100%;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    transition: all 1s ease;
+    width: 30rem;
+    z-index: 1;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.inside-page__container {
+    height: 100%;
+    width: 100%;
+}
+
+/* Functionality ====================================*/
+
+/* This is to keep the card centered (within its container) when opened */
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 60rem;
+}
+
+/* When the card is hovered, the flip card container will rotate */
+.card:hover .flip-card__container {
+    transform: rotateY(-180deg);
+}
+
+.card:hover .bookmark {
+    transform:translateY(-75px);
+    transition: all 1s ease-out;
+}
+
+/* Sub card section */
+
+.sub-card-cel-start {
+    border-radius: 5px;
+    background-color: #ff40a1;
+    width: 8rem;
+    height: 8rem;
+    align: center;
+}
+
+.sub-card-cel {
+    border-radius: 5px;
+    width: 7rem;
+    height: 7rem;
+    padding-left:0.5rem;
+    align: center;
+}
+
+.sub-card-section>* {
+    margin-top: 0.5rem;
+    display: inline-table;
+    align:left;
+    padding-top:0.5rem;
+}
+
+.sub-card-main{
+    margin-top:0.5rem;
+}
+
+/* Inside page tabs */
+
+.inside-page__tab{
+    display:none;
+    padding:1rem;
+    margin-top:-66px;
+}
+
+.active-inner-tab{
+    display:block !important;
+}
+
+/* Bookmark */
+.bookmark{ 
+    margin-top:-45px;
+    position: relative; 
+    height: 110px; 
+    width: 25px; 
+    padding: 0px; 
+    border-left: 20px solid #8a898a;
+    border-right: 20px solid #777777;
+    border-top: 25px solid transparent; 
+    transition: 1s ease-out;
+    z-index: 3;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.bookmark-icon{
+    position: relative;
+    color:white;
+    padding-top:25px;
+}
+
+.bookmark-icon:hover{
+    transform: scale(1.25);
+    transition: all 0.4s linear;
+}
+
+.bookmark-icon-section{
+    margin-left:-7px;
+    width:fit-content;
+    padding-bottom:25px;
+    z-index:1;
+}
+
+/* Pagelink Settings */
+
+.page_link{
+    padding-top: 5px;
+    font-size: 12px;
+}
+
+.page_link a{
+    color:#333;
+    text-decoration: none;
+}
+
+.page_link a:hover{
+    color:#ff40a1;
+    text-decoration: underline;
+}
+
+.inside-page__tab ul{
+    margin-top:-5px;
+    list-style-type: "→ ";
+}
+
+/* Icon Bar */
+
+.icon-scroll-bar-section {
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+  }
+
+  .circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin:1rem;
+    transition: all 0.5s ease-out;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+
+  .circle:hover {
+    transform: scale(1.2);
+    border-radius: 50%;
+    margin:1rem;
+    transition: all 0.5s ease-out;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  }
+
+  .active-category {
+    transform:scale(1.4);
+  }
+
+  .active-category:hover {
+    transform: scale(1.4);
+  }
+
+  .icon-bar-icon{
+    color:whitesmoke;
+    margin-left: 0 auto;
+    margin-right: 0 auto;
+    display: block
+  }
+  
+/* Book tabs */
+.book-tab{
+    display: none;
+}
+
+.active-book-tab{
+    display: block !important;
+    transition: all 0.5s ease-out;
+}

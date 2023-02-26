@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!--- scripts for Custom Nav By Thierry-->
+	<script>
+		function category(element) {
+
+			// get icons and booktabs
+			const elements = document.querySelectorAll(".circle");
+			const booktabs = document.querySelectorAll(".book-tab");
+
+			// remove active from all icons
+			for (let i = 0; i < elements.length; i++) {
+				elements[i].classList.remove("active-category");
+			}
+
+			// remove book tabs
+			for (let i = 0; i < booktabs.length; i++) {
+				booktabs[i].classList.remove("active-book-tab");
+			}
+
+			// add active class to icon
+			element.classList.add("active-category");
+
+			// activate the correct tab
+			for (let i = 0; i < elements.length; i++) {
+				if (elements[i].classList.contains("active-category")) {
+					booktabs[i].classList.add("active-book-tab")
+				}
+			}
+		}
+	</script>
+	<!--- Add structured data, search engine--->
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org/",
+			"@type": "WebSite",
+			"name": "Tilburg Science Hub",
+			"url": "https://www.tilburgsciencehub.com",
+			"potentialAction": {
+			  "@type": "SearchAction",
+			  "target": "https://tilburgsciencehub.com/search?q={search_term_string}",
+			  "query-input": "required name=search_term_string"
+			}
+		  }
+	</script>
+	<script type="application/ld+json">
+		  {
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			"name": "Tilburg Science Hub",
+			"alternateName": "tilburgsciencehub",
+			"url": "https://tilburgsciencehub.com",
+			"logo": "https://tilburgsciencehub.com/img/logo.svg",
+			"sameAs": [
+			  "https://www.linkedin.com/company/tilburgsciencehub",
+			  "https://github.com/tilburgsciencehub",
+			  "https://twitter.com/tilburgscience"
+			]
+		  }
+	</script>
+	<!-- Google tag (gtag.js) OLD FORMAT-->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23035208-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-23035208-2');
+	</script>
+
+	<!--snippet for google optimize (A/B tests) put back on when needed 
+	<script async src="https://www.googleoptimize.com/optimize.js?id=OPT-N42NQJS"></script>-->
+
+	<!-- Global site tag (gtag.js) - GA4 format-->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6K27JFP2RV"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-6K27JFP2RV');
+	</script>
+
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style>
+		/* CSS reset */
+		*,
+		*::after,
+		*::before {
+			box-sizing: inherit;
+			margin: 0;
+			padding: 0;
+		}
+
+		html main {
+			font-size: 30%;
+		}
+
+		main {
+			box-sizing: border-box;
+			font-family: 'Open Sans', sans-serif;
+			position: relative;
+		}
+
+		/* Main heading for card's front cover */
+		.card-front__heading {
+			font-size: 1.25rem;
+			margin-top: .75rem;
+			text-align: center;
+		}
+
+		/* Main heading for inside page */
+		.inside-page__heading {
+			padding-bottom: 1rem;
+			width: 100%;
+			font-size: 1.8rem;
+			font-weight: 800;
+			margin-top: .2rem;
+			text-align: left;
+		}
+
+		/* For both inside page's main heading and 'view me' text on card front cover */
+		.card-front__text-view {
+			font-size: 1rem;
+			font-weight: 800;
+			margin-top: .2rem;
+		}
+
+		/* Front cover */
+
+		.card-front__tp {
+			color: #fafbfa;
+		}
+
+		/* For pricing text on card front cover */
+		.card-front__text-description {
+			font-size: 0.75rem;
+			text-align: center;
+		}
+
+		/* Back cover */
+
+		/* For inside page's body text */
+		.inside-page__text {
+			font-size: 12px;
+			color: #333;
+			text-align: left;
+		}
+
+		/* Layout Structure=========================================*/
+
+		.main {
+			padding-top: 50px;
+			display: flex;
+			flex-direction: column;
+			height: max-content;
+			width: 100%;
+		}
+
+		/* Container to hold all cards in one place */
+		.card-area {
+			display: flex;
+			flex-wrap: nowrap;
+			height: 100%;
+		}
+
+		/* Card ============================================*/
+
+		/* Area to hold an individual card */
+		.card-section {
+			display: flex;
+			width: 100%;
+			justify-content: center;
+		}
+
+		/* A container to hold the flip card and the inside page */
+		.card-tsh-nav {
+			height: 20rem;
+			position: relative;
+			width: 20rem;
+			margin: 1.5rem;
+			z-index: 1;
+			border: none;
+		}
+
+		/* Flip card - covering both the front and inside front page */
+
+		/* An outer container to hold the flip card. This excludes the inside page */
+		.flip-card {
+			border: none;
+			border-radius: 20px;
+			height: 20rem;
+			perspective: 100rem;
+			position: absolute;
+			right: 0;
+			transition: all 1s ease;
+			visibility: hidden;
+			width: 20rem;
+			z-index: 100;
+		}
+
+		/* The outer container's visibility is set to hidden. This is to make everything within the container NOT set to hidden  */
+		/* This is done so content in the inside page can be selected */
+		.flip-card>* {
+			visibility: visible;
+		}
+
+		/* An inner container to hold the flip card. This excludes the inside page */
+		.flip-card__container {
+			border: none;
+			border-radius: 20px;
+			height: 20rem;
+			position: absolute;
+			right: 0;
+			transform-origin: left;
+			transform-style: preserve-3d;
+			transition: all 1s ease;
+			width: 20rem;
+		}
+
+		.card-front,
+		.card-back {
+			backface-visibility: hidden;
+			height: 20rem;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 20rem;
+			z-index: 3;
+		}
+
+		/* Styling for the front side of the flip card */
+
+		/* container for the front side */
+		.card-front {
+			background-color: #fafbfa;
+			height: 20rem;
+			width: 20rem;
+			border-top-right-radius: 20px;
+			border-bottom-right-radius: 20px;
+		}
+
+		/* Front side's top section */
+		.card-front__tp {
+			align-items: center;
+			clip-path: polygon(0 0, 100% 0, 100% 90%, 57% 90%, 50% 100%, 43% 90%, 0 90%);
+			display: flex;
+			flex-direction: column;
+			height: 17.5rem;
+			justify-content: center;
+			border-top-right-radius: 20px;
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
+
+		.card-front__tp--card1 {
+			background: linear-gradient(to bottom,
+					#ff73b9,
+					#ff40a1);
+		}
+
+		.card-front__tp--card2 {
+			background: linear-gradient(to bottom,
+					#7394ff,
+					#4046ff);
+		}
+
+		.card-front__tp--card3 {
+			background: linear-gradient(to bottom,
+					#73ffa2,
+					#40ff69);
+		}
+
+		.inside-page__heading--card1,
+		.card-front__text-view--card1 {
+			color: #ff62b2;
+		}
+
+		.inside-page__heading--card2,
+		.card-front__text-view--card2 {
+			color: #4046ff;
+		}
+
+		.inside-page__heading--card3,
+		.card-front__text-view--card3 {
+			color: #40ff69;
+		}
+
+		.color4 {
+			background-color: #4046ff;
+		}
+
+		/* Front card's bottom section */
+		.card-front-bt {
+			align-items: center;
+			display: flex;
+			justify-content: center;
+			border-bottom-right-radius: 20px;
+		}
+
+		/* Styling for the back side of the flip card */
+
+		.card-back {
+			height: 100%;
+			padding: 2rem;
+			background-color: white;
+			border-top-left-radius: 20px;
+			border-bottom-left-radius: 20px;
+			transform: rotateY(180deg);
+		}
+
+		/* Inside page */
+
+		.inside-page {
+			background-color: white;
+			height: 20rem;
+			position: absolute;
+			right: 0;
+			transition: all 1s ease;
+			width: 20rem;
+			z-index: 1;
+			border-top-right-radius: 20px;
+			border-bottom-right-radius: 20px;
+		}
+
+		/* Functionality ====================================*/
+
+		/* This is to keep the card centered (within its container) when opened */
+		.card-tsh-nav:hover {
+			transition:all 1s linear;
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    		width: 40rem;
+			background-color: white;
+			border-radius:20px;
+			border: none;
+		}
+
+		/* When the card is hovered, the flip card container will rotate */
+		.card-tsh-nav:hover .flip-card__container {
+			transform: rotateY(-180deg);
+		}
+
+		.card-tsh-nav:hover .bookmark {
+			transform: translateY(-65px);
+		}
+
+		/* Bookmark */
+		.bookmark {
+			margin-top: -45px;
+			position: relative;
+			height: 110px;
+			width: 25px;
+			padding: 0px;
+			border-left: 20px solid #8a898a;
+			border-right: 20px solid #777777;
+			border-top: 25px solid transparent;
+			transition: 1s ease-out;
+			z-index: 3;
+		}
+
+		.bookmark-icon {
+			position: relative;
+			color: white;
+			padding-top: 25px;
+		}
+
+		.bookmark-icon:hover {
+			transform: scale(1.25);
+			transition: all 0.4s linear;
+		}
+
+		.bookmark-icon-section {
+			margin-left: -7px;
+			width: fit-content;
+			padding-bottom: 25px;
+			z-index: 1;
+		}
+
+		/* Book tab*/
+		.book-tab {
+			display: none;
+			transition: all 1s linear;
+		}
+
+		.active-book-tab{
+			display: block !important;
+		}
+
+		/* Icon Bar */
+
+		.icon-scroll-bar-section {
+			align-items: center;
+			margin: 0 auto;
+			display: flex;
+			padding-top: 75px;
+			padding-bottom: 75px;
+		}
+
+		.circle {
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			margin: 1rem;
+			transition: all 0.5s ease-out;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+		}
+
+		.circle:hover {
+			transform: scale(1.2);
+			border-radius: 50%;
+			margin: 1rem;
+			transition: all 0.5s ease-out;
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+		}
+
+		.active-category {
+			transform: scale(1.4);
+		}
+
+		.active-category:hover {
+			transform: scale(1.4);
+		}
+
+		.icon-bar-icon {
+			color: whitesmoke;
+			transform: scale(1.5);
+		}
+	</style>
+
+	{{ $style := resources.Get "scss/bootstrap.scss" | toCSS | minify | fingerprint }}
+	<link rel="stylesheet" href="{{ $style.Permalink }}" emotion="🤩">
+	<script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://use.typekit.net/pzc6ybk.css">
+	<link rel="icon" href="/img/favicon.png" type="image/x-icon">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://www.mattboldt.com/demos/typed-js/js/typed.custom.js"></script>
+
+	<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
+	<title>{{ if .Params.tutorialtitle }}{{ .Params.tutorialtitle }}{{ else }}{{ .Title }}{{ end }} {{ if .IsHome
+		}}{{else}} - Tilburg Science Hub{{end}}</title>
+	{{- if .Params.keywords -}}
+	<meta name="keywords" content="{{ .Params.keywords }}">
+	{{- end -}}
+	{{ template "_internal/google_analytics.html" . }}
+	<meta property="og:title"
+		content="{{ if .Params.tutorialtitle }}{{ .Params.tutorialtitle }}{{ else }}{{ .Title }}{{ end }} {{ if .IsHome }}{{else}} - Tilburg Science Hub{{end}}" />
+	{{ if .Params.description }}
+	<meta property="og:description" content="{{ .Params.description }}" />
+	<meta name="description" content="{{ .Params.description }}" />
+	{{ end }}
+	{{- if .Params.ogimage -}}
+	<meta property="og:image" content="{{ .Permalink }}{{ .Params.ogimage }}" />
+	{{ else }}
+	<meta property="og:image" content="{{- .Site.BaseURL -}}/img/default-og-image.png" />
+	{{ end }}
+	{{- if .Params.noindex -}}
+	<meta name="robots" content="noindex">
+	{{- end -}}
+
+	<!-- Place this tag in your head or just before your close body tag. -->
+	<script async src="https://buttons.github.io/buttons.js"></script>
+
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-TBJ77ND');</script>
+	<!-- End Google Tag Manager -->
+
+
+</head>
+
+
+<body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TBJ77ND" height="0" width="0"
+			style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->

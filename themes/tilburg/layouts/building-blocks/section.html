@@ -1,55 +1,102 @@
-{{- partial "header.html" . -}}
+{{- partial "header_new_nav.html" . -}}
 
 <span id="scrollTo" class=""><a href="#{{ .CurrentSection.Name | urlize }}-ezo"></a></span>
 
-<div class="container content">
-  <br><br><br><br>
-  <div class="row justify-content-center">
-    <div class="col-lg-11 col-22">
-      <h1 class="text-center">Building Blocks</h1>
-      <p class="text-center text-secondary my-5">
-        Building blocks are the DNA of our platform. Use and "mix" our code snippets and workflows to create something unique.
-      </p>
-     <!--  <div class="position-relative mx-5 searchIconRight w-75 mx-auto">
-        <input
-          type="text"
-          class="form-control form-control-lg border-0 shadow-sm buildingBlockSearch px-4"
-          placeholder="What are you looking for?"
-        />
-        <div
-          class="position-absolute w-100 bg-white rounded shadow buildingBlocksSuggestions"
-        ></div>
-      </div> -->
+<main class="main">
+
+  <section class="icon-scroll-bar-section">
+
+    {{- range where .Site.Pages "Section" "building-blocks" -}} {{ if eq .Params.isParent "true" }} {{- range .Pages -}}   
+    <div class="circle" style="background-color: {{ .Params.color}};" onclick="category(this)">
+      <i class="{{ .Params.icon}} fa-2xl icon-bar-icon"></i>
+    </div>
+    {{- end -}} {{ end }} {{- end -}}
+    
+  </section>
+
+  {{- range where .Site.Pages "Section" "building-blocks" -}} {{ if eq .Params.isParent "true" }} {{- range .Pages -}}
+  <!-- Book tab 1-->
+  <section class="book-tab">
+
+    <h2 style="text-align:center;">{{.Title}}</h2>
+    <p style="text-align:center;margin-bottom: 100px;">{{.Description}}</p>
+    <div class="card-area">
+
+      <!-- Card Section-->
+      <div class="card-section">
+
+        {{- range .Pages -}}
+        <!-- Card -->
+        <div class="card-tsh-nav">
+
+          <!--- No error in this Div-->
+
+          <div class="flip-card">
+
+            
+            <div class="flip-card__container">
+              <div class="card-front">
+                <div class="card-front__tp card-front__tp--card1">
+                  <img src="images/icon-computer.png" style="width:100px;height:75px;margin-top: -20px;">
+                  <h2 class="card-front__heading">
+                    {{.Title}}
+                  </h2>
+                  <p class="card-front__text-description">
+                    {{.Description}}
+                  </p>
+                </div>
+
+                <div class="card-front-bt">
+                  <p class="card-front__text-view card-front__text-view--card1">
+                    HOVER ME
+                  </p>
+                </div>
+              </div>
+              <div class="card-back">
+                <div class="inside-page__container">
+                  <h3 class="inside-page__heading inside-page__heading--card1">
+                    {{.Title}}
+                  </h3>
+                  <p class="inside-page__text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut nulla tincidunt, accumsan massa
+                    quis, ultrices ex. Etiam at gravida lectus. Cras suscipit iaculis blandit. Aenean quis fermentum
+                    ipsum.
+                  </p>
+                  <div class="sub-card-main">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--- No error in this Div-->
+
+          </div>
+          <!--- / Div-->
+
+          <div class="inside-page">
+
+            <div class="bookmark">
+              <div class="bookmark-icon-section">
+                
+                <div class="bookmark-icon"><a href="#" style="color:white"><i
+                      class="fa-brands fa-linkedin fa-2xl"></i></a></div>
+                <div class="bookmark-icon"><a href="#" style="color:white"><i
+                      class="fa-solid fa-bookmark fa-2xl"></i></a></div>
+              </div>
+            </div>
+            
+          </div>
+          
+        </div>
+        {{ end }}
+
+      </div>
+
     </div>
 
-  </div>
-  <br><br><br><br>
-  <!-- all the building blocks -->
-  <div class="row justify-content-center buildingBlocksRow">
-    <div class="col-20">
-      {{- range where .Site.Pages "Section" "building-blocks" -}} {{ if eq .Params.isParent "true" }} {{- range .Pages -}}
-      <div class="p-5 bg-white mb-5 rounded" id="{{ .Title | urlize }}-ezo">
-        <div class="row">
-          <div class="col-lg-8 col-24" >
-            <h4 class="heading m-0 mb-3 mr-3">{{ .Title }}</h4>
-          </div>
-          <div class="col-lg-16 col-24">
-            <div class="row">
-              {{- range .Pages -}}
-              <div class="col-24 col-lg-12 mb-4" id="{{ .Title | urlize }}-ezo">
-                <h5 class="heading font-weight-normal" style="font-size: 16px; height: -webkit-fit-content;">{{ .Title }}</h5>
-                {{ range .Pages }}
-                <a class="d-block" href="{{.Permalink}}">{{.Title}}</a>
-                {{ end }}
-              </div>
-              {{ end }}
-            </div>
-          </div>
-        </div>
-      </div>
-      {{- end -}} {{ end }} {{- end -}}
-    </div>
-  </div>
-</div>
+  </section>
+  {{- end -}} {{ end }} {{- end -}}
+  
+</main>
 
 {{- partial "footer.html" . -}}
